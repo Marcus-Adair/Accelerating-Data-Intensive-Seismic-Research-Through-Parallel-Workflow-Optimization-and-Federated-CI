@@ -117,9 +117,6 @@ if [ -z $runnum ]; then
     runnum=0
 fi
 
-# for testing*
-export PYTHONPATH=/MudPy/src/python:$PYTHONPATH         ##*** TODO: remove this line before building the new image, (cuz i messed up PYTHONPATH in 1st image)
-
 # activate the python environment built in to this Singularity image
 cd /
 . quake3.6/bin/activate
