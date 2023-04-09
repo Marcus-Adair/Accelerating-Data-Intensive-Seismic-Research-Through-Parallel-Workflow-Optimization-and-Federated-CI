@@ -1,0 +1,31 @@
+# Submit file for A jobs which make waveforms for 2 ruptures each over the OSG
+#
+# This uses a singularity container which brings in the environment and software neeeded
+# This assumes that .npy matrices are being recycled and requests less resources because of that
+
+universe = vanilla
+
++SingularityImage = "stash:///osgconnect/public/marcus_adair/madair_mudpy_mudsing_image_complete_v1.sif"
+
+executable = dag_v2_4_mudpy_OSG_config_wrap.sh
+
+arguments = fakequakes_run$(runnumber) A $(preparedinput) $(ruptrunnumber)
+
+transfer_input_files = ../prepinput/$(preparedinput)/distancematrices.tar.gz, dag_v2_4_jobA.sh, ../prepinput/$(preparedinput)/inputfiles.tar.gz, ../prepinput/$(preparedinput)/ruptures.list
+
+when_to_transfer_output = ON_EXIT
+
+# output log files
+output	= fakequakes_output_run0/fakequakes_makerupts$(ruptrunnumber).out
+error   = fakequakes_output_run0/fakequakes_makerupts$(ruptrunnumber).error
+log	= fakequakes_output_run0/fakequakes_makerupts$(ruptrunnumber).log
+
+
++has_mpi = true
+
+request_cpus	= 4
+request_memory	= 8GB
+request_disk	= 4GB
+
+# run once
+queue 1

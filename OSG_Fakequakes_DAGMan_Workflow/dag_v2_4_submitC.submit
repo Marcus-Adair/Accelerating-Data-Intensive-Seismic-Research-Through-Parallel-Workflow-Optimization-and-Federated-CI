@@ -1,0 +1,31 @@
+# Submit file for C  jobs which make waveforms for 2 ruptures each over the OSG
+#
+# This uses a singularity container which brings in the environment and software neeeded
+#
+
+universe = vanilla
+
++SingularityImage = "stash:///osgconnect/public/marcus_adair/madair_mudpy_mudsing_image_complete_v1.sif"
+
+executable = dag_v2_4_mudpy_OSG_config_wrap.sh
+
+arguments = fakequakes_run$(runnumber) C $(preparedinput) $(ruptname) $(ruptname2)
+
+transfer_input_files = stash:///osgconnect/public/marcus_adair/prepinput/$(preparedinput)/mseeds.tar.gz, dag_v2_4_jobC.sh, ../prepinput/$(preparedinput)/inputfiles.tar.gz, ../prepinput/$(preparedinput)/ruptures/$(ruptname).rupt, ../prepinput/$(preparedinput)/ruptures/$(ruptname).log, ../prepinput/$(preparedinput)/ruptures/$(ruptname2).rupt, ../prepinput/$(preparedinput)/ruptures/$(ruptname2).log
+
+when_to_transfer_output = ON_EXIT
+
+# output log files
+output	= fakequakes_output_run$(runnumber)/fakequakes_run$(runnumber).out
+error   = fakequakes_output_run$(runnumber)/fakequakes_run$(runnumber).error
+log	= fakequakes_output_run$(runnumber)/fakequakes_run$(runnumber).log
+
+
++has_mpi = true
+
+request_cpus	= 4
+request_memory	= 16GB
+request_disk	= 14GB
+
+# run once
+queue 1
