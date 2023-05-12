@@ -735,8 +735,8 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
         if (metThresholdInit):
             if (currRuntimeSec % probeTimeSeconds ==  0): # Check if below threshold every set amount of seconds 
                 if (instThroughput < threshold):
-                    belowThreshCount = belowThreshCount + 1
                     if (completeJobs >= ruptureJobs):
+                        belowThreshCountW = belowThreshCountW + 1
                         # Remove a wave job from the list of OSG jobs
                         if (len(waveSubs) > 0):
                             cloudbursted = False
@@ -763,6 +763,7 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
                                 print("out of osg wave jobs to cloudburst")
 
                     else:
+                        belowThreshCountR = belowThreshCountR + 1
                         if (len(rupSubs) > 0):
                             cloudbursted = False
                             # If its not already submitted on OSG
