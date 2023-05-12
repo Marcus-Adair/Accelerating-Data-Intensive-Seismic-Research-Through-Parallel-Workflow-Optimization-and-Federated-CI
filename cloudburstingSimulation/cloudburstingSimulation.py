@@ -550,10 +550,14 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
 
     lastSubmittedOSGJob = convert(str(rupSubs[0]) + " "+rupDateSubs[0]) # init 
 
-    cloudburstedJobsFromThresh = 0
-    belowThreshCount = 0
-    burstedFromLongWaitCount = 0
-    submissionGapBurstCount = 0
+    cloudburstedJobsFromThreshR = 0
+    belowThreshCountR = 0
+    cloudburstedJobsFromThreshW = 0
+    belowThreshCountW = 0
+    burstedFromLongWaitCountR = 0
+    submissionGapBurstCountR = 0
+    burstedFromLongWaitCountW = 0
+    submissionGapBurstCountW = 0
 
     curSeconds = 0
     waitBurstCooldownStack = 0 # time in minutes
@@ -753,26 +757,7 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
                                 cloudburstingWaveJobs[cloudburstingWaveJobID] = 0
                                 cloudburstingWaveJobID = cloudburstingWaveJobID + 1
                                 cloudbursted = True
-                                cloudburstedJobsFromThresh = cloudburstedJobsFromThresh + 1
-
-                            # If job is submitted but not executed
-                            # if (not cloudbursted):
-                            #     print("not cloudbursted, attempting to run a waiting wave job at the end of submission line")
-                            #     exDatetime = convert(str(waveExs[len(waveExs)-1]) + " "+waveDateExs[len(waveDateExs)-1])
-                            #     if (exDatetime > d):
-                            #         print("Cloudbursting a wave job that was submitted, not executed ..."+"(cloud job: "+str(cloudburstedJob))
-                            #         cloudburstedJob = cloudburstedJob + 1
-                            #         waveSubs.pop(len(waveSubs)-1)
-                            #         waveExs.pop(len(waveExs)-1)
-                            #         waveTerms.pop(len(waveTerms)-1)
-                            #         waveDateSubs.pop(len(waveSubs)-1)
-                            #         waveDateExs.pop(len(waveExs)-1)
-                            #         waveDateTerms.pop(len(waveTerms)-1)
-                            #         waveJobCodes.pop(len(waveTerms)-1)
-                            #         cloudburstingWaveJobs[cloudburstingWaveJobID] = 0
-                            #         cloudburstingWaveJobID = cloudburstingWaveJobID + 1
-                            #     else:
-                            #         print("The waiting job had already been executed")
+                                cloudburstedJobsFromThreshW = cloudburstedJobsFromThreshW + 1
                         else:
                             if(verbosePrint):
                                 print("out of osg wave jobs to cloudburst")
@@ -801,25 +786,7 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
                                 cloudburstingRuptureJobs[cloudburstingRuptureJobID] = 0
                                 cloudburstingRuptureJobID = cloudburstingRuptureJobID + 1
                                 cloudbursted = True
-                                cloudburstedJobsFromThresh = cloudburstedJobsFromThresh + 1
-
-                            # if (not cloudbursted):
-                            #     print("not cloudbursted, attempting to run a waiting rup job at the end of submission line")
-                            #     exDatetime = convert(str(rupExs[len(rupExs)-1]) + " "+rupDateExs[len(rupDateExs)-1])
-                            #     if (exDatetime > d):
-                            #         print("Cloudbursting a rupture job that was submitted, not executed ..."+"(cloud job: "+str(cloudburstedJob))
-                            #         cloudburstedJob = cloudburstedJob + 1
-                            #         rupSubs.pop(len(rupSubs)-1)
-                            #         rupExs.pop(len(rupExs)-1)
-                            #         rupTerms.pop(len(rupTerms)-1)
-                            #         rupDateSubs.pop(len(rupSubs)-1)
-                            #         rupDateExs.pop(len(rupExs)-1)
-                            #         rupDateTerms.pop(len(rupTerms)-1)
-                            #         rupJobCodes.pop(len(rupTerms)-1)
-                            #         cloudburstingRuptureJobs[cloudburstingRuptureJobID] = 0
-                            #         cloudburstingRuptureJobID = cloudburstingRuptureJobID + 1
-                            #     else:
-                            #         print("The waiting job had already been executed")
+                                cloudburstedJobsFromThreshR = cloudburstedJobsFromThreshR + 1
                         else:
                             if(verbosePrint):
                                 print("out of osg rupture jobs to cloudburst")
@@ -860,22 +827,12 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
                             waveJobCodes.pop(waveIndex)
                             cloudburstingWaveJobs[cloudburstingWaveJobID] = 0
                             cloudburstingWaveJobID = cloudburstingWaveJobID + 1
-                            burstedFromLongWaitCount = burstedFromLongWaitCount + 1
+                            burstedFromLongWaitCountW = burstedFromLongWaitCountW + 1
                             # After cloudbursting a wave job that is waiting too long, break out of the loop and go to the next second of the simulation
                             # So cloudburst OSG jobs that are waiting too long once every second
 
                             waveIndex = waveIndex + 1
                             break
-                        #else:
-                            #if(verbosePrint):
-                            #print("It had NOT been waiting on the queue too long ...")
-                        
-                    #else:                        
-                        #if(verbosePrint):
-                        #    print("Job Executed ...")
-                #else:
-                #    if(verbosePrint):
-                #        print("Wave job NOT yet submitted ...")
 
                 waveIndex = waveIndex - 1
                 
@@ -908,23 +865,12 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
                             rupJobCodes.pop(rupIndex)
                             cloudburstingRuptureJobs[cloudburstingRuptureJobID] = 0
                             cloudburstingRuptureJobID = cloudburstingRuptureJobID + 1
-                            burstedFromLongWaitCount = burstedFromLongWaitCount + 1
+                            burstedFromLongWaitCountR = burstedFromLongWaitCountR + 1
                             # After cloudbursting a rupture job that is waiting too long, break out of the loop and go to the next second of the simulation
                             # So cloudburst OSG jobs that are waiting too long once every second
                             rupIndex = rupIndex + 1
                             break
-                        #else:
-                            #if(verbosePrint):
-                            #print("It had NOT been waiting on the queue too long ...")
-                    
-                    #else:                        
-                        #if(verbosePrint):
-                        #    print("Job Executed ...")
-                #else:
-                #    if(verbosePrint):
-                #        print("Rup job NOT yet submitted ...")
 
-                        
                 rupIndex = rupIndex - 1
         # --------------------------------------------
 
@@ -959,25 +905,7 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
                             cloudburstingWaveJobs[cloudburstingWaveJobID] = 0
                             cloudburstingWaveJobID = cloudburstingWaveJobID + 1
                             cloudbursted = True
-
-                        # If job is submitted but not executed
-                        # if (not cloudbursted):
-                        #     print("not cloudbursted, attempting to run a waiting wave job at the end of submission line")
-                        #     exDatetime = convert(str(waveSubs[len(waveSubs)-1]) + " "+waveDateSubs[len(waveDateSubs)-1])
-                        #     if (exDatetime > d):
-                        #         print("Cloudbursting a wave job that was submitted, not executed because of OSG wait...")
-                        #         waveSubs.pop(len(waveSubs)-1)
-                        #         waveExs.pop(len(waveExs)-1)
-                        #         waveTerms.pop(len(waveTerms)-1)
-                        #         waveDateSubs.pop(len(waveSubs)-1)
-                        #         waveDateExs.pop(len(waveExs)-1)
-                        #         waveDateTerms.pop(len(waveTerms)-1)
-                        #         waveJobCodes.pop(len(waveTerms)-1)
-                        #         cloudburstingWaveJobs[cloudburstingWaveJobID] = 0
-                        #         cloudburstingWaveJobID = cloudburstingWaveJobID + 1
-                        #         cloudbursted = True
-                        #     else:
-                        #         print("The waiting job had already been executed")
+                            submissionGapBurstCountW = submissionGapBurstCountW +1
 
                         if (cloudbursted):
                             waitBurstCooldownStack = waitBurstCooldownStack + 5
@@ -1006,23 +934,8 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
                             cloudburstingRuptureJobs[cloudburstingRuptureJobID] = 0
                             cloudburstingRuptureJobID = cloudburstingRuptureJobID + 1
                             cloudbursted = True
+                            submissionGapBurstCountR = submissionGapBurstCountR + 1
 
-                        # if (not cloudbursted):
-                        #     print("not cloudbursted, attempting to run a waiting rup job at the end of submission line")
-                        #     exDatetime = convert(str(rupSubs[len(rupSubs)-1]) + " "+rupDateSubs[len(rupDateSubs)-1])
-                        #     if (exDatetime > d):
-                        #         rupSubs.pop(len(rupSubs)-1)
-                        #         rupExs.pop(len(rupExs)-1)
-                        #         rupTerms.pop(len(rupTerms)-1)
-                        #         rupDateSubs.pop(len(rupSubs)-1)
-                        #         rupDateExs.pop(len(rupExs)-1)
-                        #         rupDateTerms.pop(len(rupTerms)-1)
-                        #         rupJobCodes.pop(len(rupTerms)-1)
-                        #         cloudburstingRuptureJobs[cloudburstingRuptureJobID] = 0
-                        #         cloudburstingRuptureJobID = cloudburstingRuptureJobID + 1
-                        #         cloudbursted = True
-                        #     else:
-                        #         print("The waiting job had already been executed")
                         if (cloudbursted):
                             waitBurstCooldownStack = waitBurstCooldownStack + 5
                     else:
@@ -1078,6 +991,7 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
                     cloudComputedaSecond = True
                 else:
                     completeJobs += 1
+                    cloudWaveJobs = cloudWaveJobs + 1
             if (cloudJobsComplete):
                 finishingWaveJobs = False # trigger end of loop if all jobs complete 
 
@@ -1107,12 +1021,24 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
     print("The length of complete wave cloud jobs is:"+str(cloudWaveJobs))
     print("This totals to: "+str(osgRupJobs+osgWaveJobs+cloudRupJobs+cloudWaveJobs))
     print("The number of completeJobs is: "+str(completeJobs))
-    print("The number of jobs that got cloudbursted due to low threshold is: "+str(cloudburstedJobsFromThresh))
-    print("The number that was below threshold was: "+str(belowThreshCount))
+    print ("--------------------------")
+    print("The number that was below threshold was: "+str(belowThreshCountR+belowThreshCountW)+" ("+str(belowThreshCountR)+"were rup and "+str(belowThreshCountW)+" were wave)")
+    print("The number of jobs that got cloudbursted due to low threshold is: "+str(cloudburstedJobsFromThreshR+cloudburstedJobsFromThreshW)+" ("+str(cloudburstedJobsFromThreshR)+"were rup and "+str(cloudburstedJobsFromThreshW)+" were wave)")
+    print("The number of jobs that got cloudbursted after gap in submission is: "+str(submissionGapBurstCountR+submissionGapBurstCountW)+" ("+str(submissionGapBurstCountR)+"were rup and "+str(submissionGapBurstCountW)+" were wave)")
+    print("The number of jobs that got cloudbursted from waiting on the queue too long is: "+str(burstedFromLongWaitCountR+burstedFromLongWaitCountW)+" ("+str(burstedFromLongWaitCountR)+"were rup and "+str(burstedFromLongWaitCountW)+" were wave)")
     cloudDecimal = (cloudRupJobs+cloudWaveJobs)/(osgRupJobs+osgWaveJobs+cloudRupJobs+cloudWaveJobs)
     cloudPercent = cloudDecimal * 100
     formattedCloudPercentage = "{:.2f}%".format(cloudPercent)  # Format the percentage to two decimal places
     print("The percentage of jobs completed on cloud/VDC resources is: "+formattedCloudPercentage)
+    cloudDecimal = (cloudRupJobs)/(osgRupJobs+cloudRupJobs)
+    cloudPercent = cloudDecimal * 100
+    formattedCloudPercentage = "{:.2f}%".format(cloudPercent) 
+    print("The percentage of rup jobs completed on cloud/VDC: "+formattedCloudPercentage)
+    cloudDecimal = (cloudWaveJobs)/(osgWaveJobs+cloudWaveJobs)
+    cloudPercent = cloudDecimal * 100
+    formattedCloudPercentage = "{:.2f}%".format(cloudPercent)  
+    print("The percentage of wave jobs completed on cloud/VDC: "+formattedCloudPercentage+"\n")
+
 
     # Write CSV file with instant throughput every second of the OSG + Cloudbursting simulation runtime 
     fields = ['DateTime','InstThroughput'] # fields of the csv file
