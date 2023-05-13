@@ -4,6 +4,9 @@
 # every second of a runtime among other things. It uses real OSG submission, execution, and termination times 
 # to step through their runtimes and simulate cloudbursting some of those jobs. The aim to is improve throughput and
 # runtime. 
+#
+# Call this script with two files as arguments and additional parameter contol via the flag system. The two files you
+# pass in are csv files where one has the times of a DAGMan and the other has individual job times for each job in the DAGMan.
 
 import csv
 import sys
