@@ -966,9 +966,7 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
             
     # Done with the daterange loop and the OSG jobs ----------------------------------- #
 
-    
-   
-    completedJobs = completeJobs # Save the number of jobs completed over OSG
+    #completedJobs = completeJobs # Save the number of jobs completed over OSG
     
     # If some are, let them finish, keep track of how many seconds it takes keep track of total instant throughput for every second
     if (len(cloudburstingWaveJobs)>0):
@@ -977,11 +975,12 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
 
         while (finishingWaveJobs):
             cloudJobsComplete = True
-            completeJobs = completedJobs
+            #completeJobs = completedJobs
             addRow = [endDateTime, '']
             cloudComputedaSecond = False
 
             # For every cloudbursting job, increments its time by a second
+            toRemoveList = []
             for jobID, timeSeconds in cloudburstingWaveJobs.items():
                 # If the job is still running after the OSG jobs finish
                 if (timeSeconds < waveJobTimeSeconds ):
@@ -991,8 +990,14 @@ def main(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11):
                     cloudburstingWaveJobs[jobID] = newTime
                     cloudComputedaSecond = True
                 else:
-                    completeJobs += 1
+                    completeJobs = completeJobs + 1
                     cloudWaveJobs = cloudWaveJobs + 1
+                    toRemoveList.append(jobID)
+                    if(verbosePrint):
+                        print("wave job complete in cloud after OSG done at: "+str(d)+" ("+str(completeJobs)+"/"+str(totalJobs)+" done)")
+            for toRemove in toRemoveList:
+                cloudburstingWaveJobs.pop(toRemove) # remove the complete jobs from the list so they're not incremented anymore
+
             if (cloudJobsComplete):
                 finishingWaveJobs = False # trigger end of loop if all jobs complete 
 
