@@ -1,5 +1,7 @@
 # Optimizing Earthquake Simulations and the OSG to Promote Interdisciplinary, Data-Intensive Research
 
+# FakeQuakes DAGMan Workflow (FDW) Source Code
+
 This repository contains source code for the FakeQuakes DAGMan Workflow, a tool that utilizes OSG to parallelize and expedite FakeQuakes earthquakes simulation. This workflow is to be integrated into the VDC.
 
 The submit files for running OSG jobs use a custom Singularity image with MudPy installed and other required scripts required for the DAGMan workflow to work.
