@@ -1,4 +1,4 @@
-# Optimizing Earthquake Simulations and the OSG to Promote Interdisciplinary, Data-Intensive Research
+# Harnessing Cyberinfrastructure and Data Services for Democratizing Data-Intensive Research
 
 # FakeQuakes DAGMan Workflow (FDW) Source Code
 
