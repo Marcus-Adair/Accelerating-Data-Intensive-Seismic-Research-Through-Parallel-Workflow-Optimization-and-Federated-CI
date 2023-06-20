@@ -1,4 +1,4 @@
-# Harnessing Cyberinfrastructure and Data Services for Democratizing Data-Intensive Research
+# Harnessing Data Cyberinfrastructure and Services for Democratizing Data-Intensive Seismic Research
 
 # FakeQuakes DAGMan Workflow (FDW) Source Code
 
