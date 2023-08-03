@@ -1,4 +1,4 @@
-# Accelerating Data-Intensive Seismic Research through Parallel Workflow Optimization and Federated Cyberinfrastructure
+# Accelerating Data-Intensive Seismic Research Through Parallel Workflow Optimization and Federated Cyberinfrastructure
 
 # FakeQuakes DAGMan Workflow (FDW) Source Code
 
