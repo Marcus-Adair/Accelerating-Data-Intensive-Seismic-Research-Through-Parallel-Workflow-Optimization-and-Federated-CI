@@ -11,7 +11,7 @@ executable = dag_v2_4_mudpy_OSG_config_wrap.sh
 
 arguments = fakequakes_run$(runnumber) C $(preparedinput) $(ruptname) $(ruptname2)
 
-transfer_input_files = stash:///osgconnect/public/marcus_adair/prepinput/$(preparedinput)/mseeds.tar.gz, dag_v2_4_jobC.sh, ../prepinput/$(preparedinput)/inputfiles.tar.gz, ../prepinput/$(preparedinput)/ruptures/$(ruptname).rupt, ../prepinput/$(preparedinput)/ruptures/$(ruptname).log, ../prepinput/$(preparedinput)/ruptures/$(ruptname2).rupt, ../prepinput/$(preparedinput)/ruptures/$(ruptname2).log
+transfer_input_files = osdf:///ospool/ap21/data//marcus_adair/prepinput/$(preparedinput)/mseeds.tar.gz, dag_v2_4_jobC.sh, ../prepinput/$(preparedinput)/inputfiles.tar.gz, ../prepinput/$(preparedinput)/ruptures/$(ruptname).rupt, ../prepinput/$(preparedinput)/ruptures/$(ruptname).log, ../prepinput/$(preparedinput)/ruptures/$(ruptname2).rupt, ../prepinput/$(preparedinput)/ruptures/$(ruptname2).log
 
 when_to_transfer_output = ON_EXIT
 

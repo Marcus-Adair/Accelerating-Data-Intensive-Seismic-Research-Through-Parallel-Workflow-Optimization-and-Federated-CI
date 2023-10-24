@@ -39,7 +39,7 @@ if [ ! -f "distancematrices.tar.gz" ]; then
 fi
 
 # check public for the existence of the prepinput dir, make it if it needs to be done for stashing  large mseeds
-cd ~/../../public/marcus_adair/prepinput
+cd ~/../../../../../ospool/ap21/data/marcus_adair/prepinput
 if [ ! -d "$prepinput" ]; then
 	mkdir $prepinput
 fi

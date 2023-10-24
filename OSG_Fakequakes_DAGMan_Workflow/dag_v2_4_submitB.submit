@@ -27,7 +27,7 @@ log	= fakequakes_output_run$(runnumber)/fakequakes_run$(runnumber).log
 +has_mpi = true
 
 # transfer output > 100MB directly to the stash to a unique directory
-transfer_output_remaps = "mseeds.tar.gz = stash:///osgconnect/public/marcus_adair/prepinput/$(preparedinput)/mseeds.tar.gz"
+transfer_output_remaps = "mseeds.tar.gz = osdf:///ospool/ap21/marcus_adair/prepinput/$(preparedinput)/mseeds.tar.gz"
 
 request_cpus	= 4
 request_memory	= 40GB

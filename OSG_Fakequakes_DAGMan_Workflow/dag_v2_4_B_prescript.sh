@@ -10,7 +10,7 @@ prepinput=$1
 # 2  options for B submit files, either one that sends in premade .mseed matrices or one that doeesn't
 
 submitfile=dag_v2_4_submitB_b.submit
-cd ~/../../public/marcus_adair/prepinput/$prepinput
+cd ~/../../../../../ospool/ap21/data/marcus_adair/prepinput/$prepinput
 if [ ! -f "mseeds.tar.gz" ]; then
 	submitfile=dag_v2_4_submitB.submit
 fi
