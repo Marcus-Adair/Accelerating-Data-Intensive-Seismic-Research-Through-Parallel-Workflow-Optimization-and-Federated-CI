@@ -245,7 +245,7 @@ if [[ "$phaseArunning" -eq "1" || "$phaseBrunning" -eq "1" ]]; then
 		
 		# ------------------------------------------ Phase B --
 		else		
-			cd ~/../../../../../ospool/ap21/data/marcus_adair/prepinput
+			cd ~/../../../../../ospool/ap21/data/marcus_adair/old-public/prepinput
 	
 			# Check in public if an msseds matrix exists or not.	
 			if [ -d "preparedinput" ]; then

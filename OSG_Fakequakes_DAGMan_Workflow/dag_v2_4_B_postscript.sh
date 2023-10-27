@@ -10,12 +10,13 @@
 
 # Get name of input folder
 prepin=$1
-
+FDW_PATH=$2
 
 # Make dagfile for C phase
 # go throught ruptures.list and for every 2 ruptures (except the first two cuz already done) add the rupture names in as vars to the AN job
 
-cd ~/prepinput/$prepin
+cd $FDW_PATH/prepinput/$prepin
+
 
 > dag_v2_subex_dagfile.dag
 i=0
@@ -62,11 +63,11 @@ do
 done
 
 # Move the sub-dagfile to be used in this DAGMan run
-mv dag_v2_subex_dagfile.dag ~/$prepin
+mv dag_v2_subex_dagfile.dag $FDW_PATH
 
 
 # handle the first waveforms made
-cd ~/$prepin
+cd $FDW_PATH
 mv preparedoutput0.tar.gz fakequakes_output_run0
 cd fakequakes_output_run0
 
@@ -76,10 +77,10 @@ rm preparedoutput0.tar.gz	# this unpacks the waveforms into a dir called wavefor
 
 
 # A .txt file will be in the directory this DAG was submitted from if G matrices were made made (because the actual ones are too large to reside in home)
-cd ~/$prepin
+cd $FDW_PATH
 gfile=GmatricesMade.txt
 if [ -f "GmatricesMade.txt" ]; then
-	mv $gfile ~/$prepin/fakequakes_output_run0/other_output
+	mv $gfile $FDW_PATH/fakequakes_output_run0/other_output
 fi
 # If .mseed G matrices were made during phase B, there were transferred out via the stash directly to public
 

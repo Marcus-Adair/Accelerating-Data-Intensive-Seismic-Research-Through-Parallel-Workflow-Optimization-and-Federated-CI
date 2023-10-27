@@ -14,7 +14,7 @@ executable = dag_v2_4_mudpy_OSG_config_wrap.sh
 
 arguments = fakequakes_run$(runnumber) B $(preparedinput) $(ruptname) $(ruptname2)
 
-transfer_input_files = dag_v2_4_jobB.sh, ../prepinput/$(preparedinput)/inputfiles.tar.gz, ../prepinput/$(preparedinput)/ruptures/$(ruptname).rupt, ../prepinput/$(preparedinput)/ruptures/$(ruptname).log, ../prepinput/$(preparedinput)/ruptures/$(ruptname2).rupt, ../prepinput/$(preparedinput)/ruptures/$(ruptname2).log
+transfer_input_files = dag_v2_4_jobB.sh, prepinput/$(preparedinput)/inputfiles.tar.gz, prepinput/$(preparedinput)/ruptures/$(ruptname).rupt, prepinput/$(preparedinput)/ruptures/$(ruptname).log, prepinput/$(preparedinput)/ruptures/$(ruptname2).rupt, prepinput/$(preparedinput)/ruptures/$(ruptname2).log
 
 when_to_transfer_output = ON_EXIT
 
@@ -27,7 +27,7 @@ log	= fakequakes_output_run$(runnumber)/fakequakes_run$(runnumber).log
 +has_mpi = true
 
 # transfer output > 100MB directly to the stash to a unique directory
-transfer_output_remaps = "mseeds.tar.gz = osdf:///ospool/ap21/marcus_adair/prepinput/$(preparedinput)/mseeds.tar.gz"
+transfer_output_remaps = "mseeds.tar.gz = osdf:///ospool/ap21/marcus_adair/old-public/prepinput/$(preparedinput)/mseeds.tar.gz"
 
 request_cpus	= 4
 request_memory	= 40GB

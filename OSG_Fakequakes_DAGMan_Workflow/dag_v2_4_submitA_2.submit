@@ -11,7 +11,7 @@ executable = dag_v2_4_mudpy_OSG_config_wrap.sh
 
 arguments = fakequakes_run$(runnumber) A $(preparedinput) $(ruptrunnumber)
 
-transfer_input_files = ../prepinput/$(preparedinput)/distancematrices.tar.gz, dag_v2_4_jobA.sh, ../prepinput/$(preparedinput)/inputfiles.tar.gz, ../prepinput/$(preparedinput)/ruptures.list
+transfer_input_files = prepinput/$(preparedinput)/distancematrices.tar.gz, dag_v2_4_jobA.sh, prepinput/$(preparedinput)/inputfiles.tar.gz, prepinput/$(preparedinput)/ruptures.list
 
 when_to_transfer_output = ON_EXIT
 
