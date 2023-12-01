@@ -5,19 +5,21 @@
 # This occurs once
 
 prepinput=$1
+FDW_PATH=$2
 
 # If mseeds exist in public dir then choose the submit file that won't make them
 # 2  options for B submit files, either one that sends in premade .mseed matrices or one that doeesn't
 
 submitfile=dag_v2_4_submitB_b.submit
-cd ~/../../public/marcus_adair/prepinput/$prepinput
+cd ~/../../../../../ospool/ap21/data/marcus_adair/old-public/prepinput/$prepinput
 if [ ! -f "mseeds.tar.gz" ]; then
 	submitfile=dag_v2_4_submitB.submit
 fi
-cd ~
+#cd ~
+#cd $FDW_PATH
 
 # Get the first two ruptures
-cd ~/prepinput/$prepinput
+cd $FDW_PATH/prepinput/$prepinput
 
 firstrup=temp
 secrup=temp
@@ -54,4 +56,4 @@ echo "VARS B1 preparedinput=\"$prepinput\"" >> dag_v2_bphase_dagfile.dag
 echo "VARS B1 ruptname=\"$firstrup\"" >> dag_v2_bphase_dagfile.dag
 echo "VARS B1 ruptname2=\"$secrup\"" >> dag_v2_bphase_dagfile.dag
 
-mv dag_v2_bphase_dagfile.dag ~/$prepinput
+mv dag_v2_bphase_dagfile.dag $FDW_PATH

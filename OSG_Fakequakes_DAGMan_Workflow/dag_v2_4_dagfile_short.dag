@@ -1,0 +1,3 @@
+SUBDAG EXTERNAL A dag_v2_arup_phase_dagfile.dag
+SCRIPT PRE A dag_v2_4_A_prescript.sh chile_test_new_osg_v1 4
+SCRIPT POST A dag_v2_4_A_postscript.sh chile_test_new_osg_v1

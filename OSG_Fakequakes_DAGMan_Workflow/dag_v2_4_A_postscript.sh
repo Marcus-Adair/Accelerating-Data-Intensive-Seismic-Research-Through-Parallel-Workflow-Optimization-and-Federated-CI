@@ -4,10 +4,11 @@
 
 prepinput=$1
 
+FDW_PATH=$2
 
 # Combine all the ruptures list into one and put it in the right place
 
-cd ~/runningtemp
+cd $FDW_PATH/runningtemp
 
 # if a temp  dir was made to store created rupture lists
 if [ -d "$prepinput" ]; then
@@ -28,9 +29,9 @@ if [ -d "$prepinput" ]; then
 	
 	mv ruptures.txt ruptures.list
 				
-	cp ruptures.list ~/$prepinput/fakequakes_output_run0/other_output # copy for user to user later
+	cp ruptures.list $FDW_PATH/fakequakes_output_run0/other_output # copy for user to user later
 
-	mv ruptures.list ~/prepinput/$prepinput	# move to be used later in DAGMan
+	mv ruptures.list $FDW_PATH/prepinput/$prepinput	# move to be used later in DAGMan
 
 	# clean up the temp folder storing rupture lists
 	cd ..

@@ -13,8 +13,14 @@ prepinput=$1
 
 nrupbundles=$2
 
-cd ~/prepinput/$prepinput
+FDW_PATH=$3
 
+echo "prepinput var: $prepinput"
+echo "nrupbundles var: $nrupbundles"
+
+
+cd $FDW_PATH/prepinput/$prepinput
+echo "after cd in: $PWD"
 
 ruptsprovided=1
 
@@ -24,9 +30,9 @@ if [ ! -f "ruptures.list" ]; then
 	echo "No ruptures were provided." >> ruptures.list
 	ruptsprovided=0
 	
-	cd ~/runningtemp
+	cd $FDW_PATH/runningtemp
         mkdir $prepinput
-	cd ~/prepinput/$prepinput	
+	cd $FDW_PATH/prepinput/$prepinput	
 fi
 
 distsprovided=1
@@ -38,14 +44,17 @@ if [ ! -f "distancematrices.tar.gz" ]; then
 	distsprovided=0
 fi
 
+
 # check public for the existence of the prepinput dir, make it if it needs to be done for stashing  large mseeds
-cd ~/../../public/marcus_adair/prepinput
+cd ~/../../../../../ospool/ap21/data/marcus_adair/old-public/prepinput
 if [ ! -d "$prepinput" ]; then
 	mkdir $prepinput
 fi
 
 # go back to the unique folder for launching this DAGMan run
-cd ~/$prepinput
+# cd ~/$prepinput
+#echo "~ is: $HOME"
+cd $FDW_PATH
 
 
 # Decide which submit file to use
@@ -65,24 +74,24 @@ fi
 # Make the A subDAG  file for A Job
 
 > dag_v2_arup_phase_dagfile.dag
-
-for ((i=0 ; i<$nrupbundles; i+=1 ))
+echo "Writing A Phase dagfile...."
+for ((i=0 ; i < $nrupbundles; i+=1 ))
 do
     if [ "$i" -eq "0" ]; then
 	echo "JOB A$i $submitfile" >> dag_v2_arup_phase_dagfile.dag
 	echo "VARS A$i runnumber=\"$i\"" >> dag_v2_arup_phase_dagfile.dag
 	echo "VARS A$i preparedinput=\"$prepinput\"" >> dag_v2_arup_phase_dagfile.dag
 	echo "VARS A$i ruptrunnumber=\"$i\"" >> dag_v2_arup_phase_dagfile.dag
-	echo "SCRIPT POST A$i dag_v2_4_An_postscript.sh $prepinput $i" >> dag_v2_arup_phase_dagfile.dag
+	echo "SCRIPT POST A$i dag_v2_4_An_postscript.sh $prepinput $i $FDW_PATH" >> dag_v2_arup_phase_dagfile.dag
 	#echo "RETRY A$i 3" >> dag_v2_arup_phase_dagfile.dag
     else 
 	echo "JOB A$i dag_v2_4_submitA_2.submit" >> dag_v2_arup_phase_dagfile.dag
         echo "VARS A$i runnumber=\"0\"" >> dag_v2_arup_phase_dagfile.dag
         echo "VARS A$i preparedinput=\"$prepinput\"" >> dag_v2_arup_phase_dagfile.dag
         echo "VARS A$i ruptrunnumber=\"$i\"" >> dag_v2_arup_phase_dagfile.dag
-        echo "SCRIPT POST A$i dag_v2_4_An_postscript.sh $prepinput $i" >> dag_v2_arup_phase_dagfile.dag 
+        echo "SCRIPT POST A$i dag_v2_4_An_postscript.sh $prepinput $i $FDW_PATH" >> dag_v2_arup_phase_dagfile.dag 
  	echo "PARENT A0 CHILD A$i" >> dag_v2_arup_phase_dagfile.dag
 	#echo "RETRY A$i 3" >> dag_v2_arup_phase_dagfile.dag
     fi 
 done
-
+echo "Done writing A Phae dagfile."

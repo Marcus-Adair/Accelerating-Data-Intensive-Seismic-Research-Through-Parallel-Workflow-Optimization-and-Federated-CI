@@ -214,7 +214,7 @@ if  [ "$mseedsmade" = "0" ]; then
     # create a txt file to send to the DAGMan working dir for a way to know that G matrices made
     > GmatricesMade.txt
     echo "G matrices were made." >> GmatricesMade.txt
-    echo "Find them in the marcus_adair public OSG directory in prepinput/$preparedinput." >>  GmatricesMade.txt
+    echo "Find them your public OSG data directory in prepinput/$preparedinput." >>  GmatricesMade.txt
     mv GmatricesMade.txt ~
 fi
 
