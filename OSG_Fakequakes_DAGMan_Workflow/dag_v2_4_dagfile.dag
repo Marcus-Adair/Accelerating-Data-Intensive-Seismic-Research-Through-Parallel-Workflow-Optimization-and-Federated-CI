@@ -1,10 +1,10 @@
 SUBDAG EXTERNAL A dag_v2_arup_phase_dagfile.dag
 SUBDAG EXTERNAL B dag_v2_bphase_dagfile.dag
 SUBDAG EXTERNAL C dag_v2_subex_dagfile.dag
-SCRIPT PRE A dag_v2_4_A_prescript.sh chile_test_new_osg_v2 4 /PATH/TO/.../Accelerating-Data-Intensive-Seismic-Research-Through-Parallel-Workflow-Optimization-and-Federated-CI/OSG_Fakequakes_DAGMan_Workflow
-SCRIPT POST A dag_v2_4_A_postscript.sh chile_test_new_osg_v2 /PATH/TO/.../Accelerating-Data-Intensive-Seismic-Research-Through-Parallel-Workflow-Optimization-and-Federated-CI/OSG_Fakequakes_DAGMan_Workflow
-SCRIPT PRE B dag_v2_4_B_prescript.sh chile_test_new_osg_v2 /PATH/TO/.../Accelerating-Data-Intensive-Seismic-Research-Through-Parallel-Workflow-Optimization-and-Federated-CI/OSG_Fakequakes_DAGMan_Workflow
-SCRIPT POST B dag_v2_4_B_postscript.sh chile_test_new_osg_v2 /PATH/TO/.../Accelerating-Data-Intensive-Seismic-Research-Through-Parallel-Workflow-Optimization-and-Federated-CI/OSG_Fakequakes_DAGMan_Workflow
-SCRIPT POST C dag_v2_4_C_postscript.sh chile_test_new_osg_v2 /PATH/TO/.../Accelerating-Data-Intensive-Seismic-Research-Through-Parallel-Workflow-Optimization-and-Federated-CI/OSG_Fakequakes_DAGMan_Workflow
+SCRIPT PRE A dag_v2_4_A_prescript.sh <RUN_NAME> 4 /PATH/TO/.../Accelerating-Data-Intensive-Seismic-Research-Through-Parallel-Workflow-Optimization-and-Federated-CI/OSG_Fakequakes_DAGMan_Workflow
+SCRIPT POST A dag_v2_4_A_postscript.sh <RUN_NAME> /PATH/TO/.../Accelerating-Data-Intensive-Seismic-Research-Through-Parallel-Workflow-Optimization-and-Federated-CI/OSG_Fakequakes_DAGMan_Workflow
+SCRIPT PRE B dag_v2_4_B_prescript.sh <RUN_NAME> /PATH/TO/.../Accelerating-Data-Intensive-Seismic-Research-Through-Parallel-Workflow-Optimization-and-Federated-CI/OSG_Fakequakes_DAGMan_Workflow
+SCRIPT POST B dag_v2_4_B_postscript.sh <RUN_NAME> /PATH/TO/.../Accelerating-Data-Intensive-Seismic-Research-Through-Parallel-Workflow-Optimization-and-Federated-CI/OSG_Fakequakes_DAGMan_Workflow
+SCRIPT POST C dag_v2_4_C_postscript.sh <RUN_NAME> /PATH/TO/.../Accelerating-Data-Intensive-Seismic-Research-Through-Parallel-Workflow-Optimization-and-Federated-CI/OSG_Fakequakes_DAGMan_Workflow
 PARENT A CHILD B
 PARENT B CHILD C
