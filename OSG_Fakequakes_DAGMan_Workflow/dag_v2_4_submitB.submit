@@ -8,7 +8,7 @@
 
 universe = vanilla
 
-+SingularityImage = "osdf:///ospool/ap21/data/marcus_adair/old-public/madair_mudpy_mudsing_image_complete_SSE_v2.sif"
++SingularityImage = "osdf:///ospool/ap21/data/marcus_adair/madair_mudpy_mudsing_image_complete_SSE_v3.sif"
 
 executable = dag_v2_4_mudpy_OSG_config_wrap.sh
 
