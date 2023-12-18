@@ -27,23 +27,23 @@ ncpus=4                             # Number of CPUs. Set to 1 when first runnin
 run_name=run                        # Run name (not related to the 'project_name' matrix stuff above)(don't change unless you know what you're doing & don't add numbers
 
 # Velocity model (.mod file)
-model_name=vel1d_chile.mod
+model_name=cascadia.mod
 
 # Fault geometry (.fault file)
-fault_name=chile.fault
+fault_name=csz_coarse.fault
 
 # Slab 1.0 Ascii file (only used for 3D fault) (.xyz file)
-slab_name=chile.xyz
+slab_name=cas_slab2_dep_02.24.18.xyz
 
  # GMSH output file (only used for 3D fault) (.mshout file)
-mesh_name=chile.mshout
+mesh_name=csz_coarse.mshout
 
-distances_name=planar_subduction    # Name of distance matrix
+distances_name=csz_coarse    # Name of distance matrix
 
 # Look here if unsure (https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system#/media/File:Utm-zones.jpg)
-utm_zone=19J
+utm_zone=10T
 
-scaling_law=T                       # Options: T for thrust, S for strike-slip, N for normal
+scaling_law=SSE                     # Options: T for thrust, S for strike-slip, N for normal
 dynamic_gflist=T                    # dynamic GFlist (True/False)
 dist_threshold=50.0                 # #(degree) station to the closest subfault must be closer to this distance
 
@@ -51,18 +51,18 @@ dist_threshold=50.0                 # #(degree) station to the closest subfault 
 nrealizations=4                     # Number of fake ruptures to generate per magnitude bin. let Nrealizations % ncpus=0
 
 # Of what approximate magnitudes, parameters of numpy.arange()
-target_mw=8.5,9.2,0.2
+target_mw=5,8,2
 
 # Maximum slip (m) allowed in the model
-max_slip=100
+max_slip=0.5
 
 # Correlation function parameters
-hurst=0.4                           # 0.4~0.7 is reasonable
+hurst=0.75                           # 0.4~0.7 is reasonable
 ldip=auto                           # Correlation length scaling, 'auto' uses  Mai & Beroza 2002, 
 lstrike=auto                        # MH2019 uses Melgar & Hayes 2019
 lognormal=T			                # (True/False)
-slip_standard_deviation=0.9
-num_modes=100                       # Modes in K-L expantion (max#= munber of subfaults )
+slip_standard_deviation=0.46
+num_modes=200                       # Modes in K-L expantion (max#= munber of subfaults )
 rake=90.0
 
 # Rupture parameters
@@ -71,30 +71,29 @@ force_area=F                        # Forces using the entire fault area defined
 no_random=F                         # If true uses median length/width if false draws from prob. distribution (True/False)
 
 # Defines the hypocentral time
-time_epi=2016-09-07T14:42:26
+time_epi=2014-04-01T23:46:47Z
 
 # Defines the specific hypocenter location if force_hypocenter=True
-hypocenter=0.8301,0.01,27.67
-
+hypocenter=None
 force_hypocenter=F                  # Forces hypocenter to occur at specified lcoationa s opposed to random (True/False)
 mean_slip=None                      # Provide path to file name of .rupt to be used as mean slip pattern
 center_subfault=None                # Integer value, if != None use that subfault as center for defining rupt area. If none then slected at random
 use_hypo_fraction=F                 # If true use hypocenter PDF positions from Melgar & Hayes 2019, if false then selects at random   (True/False)
 
 # Kinematic parameters
-source_time_function=dreger         # options are 'triangle' or 'cosine' or 'dreger'
-rise_time_depths=10,15              # Transition depths for rise time scaling
+source_time_function=ji             # options are 'triangle' or 'cosine' or 'dreger'
+rise_time_depths=1,2              # Transition depths for rise time scaling
 shear_wave_fraction=0.8             # Fraction of shear wave speed to use as mean rupture velocity
 shear_wave_fraction_deep=0.8
 shear_wave_fraction_shallow=0.49
 
 # Station information (only used when syntehsizing waveforms) (.gflist file)
 gf_list=chile_gnss.gflist
-g_name=GFs
+g_name=gnss
 
 # Displacement and velocity waveform parameters and fk-parameters
-nfft=128
-dt=1.0
+nfft=60
+dt=14400
 zeta=0.2
 dk=0.1
 pmin=0
