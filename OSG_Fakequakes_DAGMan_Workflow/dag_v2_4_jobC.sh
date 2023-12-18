@@ -88,18 +88,17 @@ epicenter=${55}
 
 
 # New SSE params
-moho_depth_in_km=${56}
-hf_dt=${57}
-duration=${58}
-pwave=${59}
-zero_phase=${60}
-order=${61}
-fcorner=${62}
-inpolygon_fault=${63}
-inpolygon_hypocenter=${64}
-high_stress_depth=${65}
-stress_parameter=${66}
-
+moho_depth_in_km=${59}
+hf_dt=${60}
+duration=${61}
+pwave=${62}
+zero_phase=${63}
+order=${64}
+fcorner=${65}
+inpolygon_fault=${66}
+inpolygon_hypocenter=${67}
+high_stress_depth=${68}
+stress_parameter=${69}
 
 
 ########---------------- DO NOT CHANGE ANYTHING UNDER THIS (unless you know what you're doing)
