@@ -88,7 +88,7 @@ shear_wave_fraction_deep=0.8
 shear_wave_fraction_shallow=0.49
 
 # Station information (only used when syntehsizing waveforms) (.gflist file)
-gf_list=chile_gnss.gflist
+gf_list=sta30.gflist
 g_name=gnss
 
 # Displacement and velocity waveform parameters and fk-parameters
