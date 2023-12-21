@@ -20,6 +20,8 @@ echo "Moving dagfiles to $outputdir/output"
 mv dag_v2_4_dagfile.dag $outputdir/dagoutput
 mv dag_v2_4_dagfile.dag.dagman.log $outputdir/dagoutput  	 
 mv dag_v2_4_dagfile.dag.dagman.out $outputdir/dagoutput
+mv dag_v2_4_dagfile.dag.lib.err $outputdir/dagoutput
+mv dag_v2_4_dagfile_short.dag $outputdir/dagoutput
 #mv dag_v2_4_dagfile.dag.lock $outputdir/dagoutput
 mv dag_v2_4_dagfile.dag.nodes.log $outputdir/dagoutput
 mv dag_v2_4_dagfile.dag.metrics $outputdir/dagoutput
