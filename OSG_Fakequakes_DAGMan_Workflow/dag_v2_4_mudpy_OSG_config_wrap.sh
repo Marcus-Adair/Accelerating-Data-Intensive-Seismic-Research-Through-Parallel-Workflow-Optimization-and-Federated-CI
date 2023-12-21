@@ -76,7 +76,7 @@ time_epi=2014-04-01T23:46:47Z
 # Defines the specific hypocenter location if force_hypocenter=True
 hypocenter=None
 force_hypocenter=F                  # Forces hypocenter to occur at specified lcoationa s opposed to random (True/False)
-mean_slip=None                      # Provide path to file name of .rupt to be used as mean slip pattern
+mean_slip_name=None                      # Provide path to file name of .rupt to be used as mean slip pattern
 center_subfault=None                # Integer value, if != None use that subfault as center for defining rupt area. If none then slected at random
 use_hypo_fraction=F                 # If true use hypocenter PDF positions from Melgar & Hayes 2019, if false then selects at random   (True/False)
 
@@ -88,7 +88,7 @@ shear_wave_fraction_deep=0.8
 shear_wave_fraction_shallow=0.49
 
 # Station information (only used when syntehsizing waveforms) (.gflist file)
-gf_list=chile_gnss.gflist
+gf_list=sta30.gflist
 g_name=gnss
 
 # Displacement and velocity waveform parameters and fk-parameters
@@ -123,7 +123,7 @@ inpolygon_fault=hypo_4548
 inpolygon_hypocenter=hypo_4548
 high_stress_depth=30
 stress_parameter=50
-
+# TODO: add shypo, it is just none for now which is fine
 
 ########---------------- DO NOT CHANGE ANYTHING UNDER THIS (unless you know what you're doing)
 
@@ -148,18 +148,18 @@ if [ "$jobphase" = "A" ]; then
     ruptrun=$4
     run_name="${run_name}_${ruptrun}"
 	
-    sh dag_v2_4_jobA.sh $project_name $HOMEPATH $ncpus $run_name $model_name $fault_name $slab_name $mesh_name $distances_name $utm_zone $scaling_law $dynamic_gflist $dist_threshold $nrealizations $target_mw $max_slip $hurst $ldip $lstrike $lognormal $slip_standard_deviation $num_modes $rake $force_magnitude $force_area $no_random $time_epi $hypocenter $force_hypocenter $mean_slip $center_subfault $use_hypo_fraction $source_time_function $rise_time_depths $shear_wave_fraction $shear_wave_fraction_deep $shear_wave_fraction_shallow $gf_list $g_name $nfft $dt $zeta $dk $pmin $pmax $kmax $custom_stf $rupture_list $max_slip_rule $slip_tol $stf_falloff_rate $rupture_name $hot_start $impulse $epicenter $prepinput $moho_depth_in_km $hf_dt $duration $pwave $zero_phase $order $fcorner $inpolygon_fault $inpolygon_hypocenter $high_stress_depth $stress_parameter
+    sh dag_v2_4_jobA.sh $project_name $HOMEPATH $ncpus $run_name $model_name $fault_name $slab_name $mesh_name $distances_name $utm_zone $scaling_law $dynamic_gflist $dist_threshold $nrealizations $target_mw $max_slip $hurst $ldip $lstrike $lognormal $slip_standard_deviation $num_modes $rake $force_magnitude $force_area $no_random $time_epi $hypocenter $force_hypocenter $mean_slip_name $center_subfault $use_hypo_fraction $source_time_function $rise_time_depths $shear_wave_fraction $shear_wave_fraction_deep $shear_wave_fraction_shallow $gf_list $g_name $nfft $dt $zeta $dk $pmin $pmax $kmax $custom_stf $rupture_list $max_slip_rule $slip_tol $stf_falloff_rate $rupture_name $hot_start $impulse $epicenter $prepinput $moho_depth_in_km $hf_dt $duration $pwave $zero_phase $order $fcorner $inpolygon_fault $inpolygon_hypocenter $high_stress_depth $stress_parameter
 elif [ "$jobphase" = "B" ]; then
 
     rupt1=$4
     rupt2=$5	
 
-    sh dag_v2_4_jobB.sh $project_name $HOMEPATH $ncpus $run_name $model_name $fault_name $slab_name $mesh_name $distances_name $utm_zone $scaling_law $dynamic_gflist $dist_threshold $nrealizations $target_mw $max_slip $hurst $ldip $lstrike $lognormal $slip_standard_deviation $num_modes $rake $force_magnitude $force_area $no_random $time_epi $hypocenter $force_hypocenter $mean_slip $center_subfault $use_hypo_fraction $source_time_function $rise_time_depths $shear_wave_fraction $shear_wave_fraction_deep $shear_wave_fraction_shallow $gf_list $g_name $nfft $dt $zeta $dk $pmin $pmax $kmax $custom_stf $rupture_list $max_slip_rule $slip_tol $stf_falloff_rate $rupture_name $hot_start $impulse $epicenter $prepinput $rupt1 $rupt2 $moho_depth_in_km $hf_dt $duration $pwave $zero_phase $order $fcorner $inpolygon_fault $inpolygon_hypocenter $high_stress_depth $stress_parameter
+    sh dag_v2_4_jobB.sh $project_name $HOMEPATH $ncpus $run_name $model_name $fault_name $slab_name $mesh_name $distances_name $utm_zone $scaling_law $dynamic_gflist $dist_threshold $nrealizations $target_mw $max_slip $hurst $ldip $lstrike $lognormal $slip_standard_deviation $num_modes $rake $force_magnitude $force_area $no_random $time_epi $hypocenter $force_hypocenter $mean_slip_name $center_subfault $use_hypo_fraction $source_time_function $rise_time_depths $shear_wave_fraction $shear_wave_fraction_deep $shear_wave_fraction_shallow $gf_list $g_name $nfft $dt $zeta $dk $pmin $pmax $kmax $custom_stf $rupture_list $max_slip_rule $slip_tol $stf_falloff_rate $rupture_name $hot_start $impulse $epicenter $prepinput $rupt1 $rupt2 $moho_depth_in_km $hf_dt $duration $pwave $zero_phase $order $fcorner $inpolygon_fault $inpolygon_hypocenter $high_stress_depth $stress_parameter
 elif [ "$jobphase" = "C" ]; then
 
     rupt1=$4
     rupt2=$5
 
-    sh dag_v2_4_jobC.sh $project_name $HOMEPATH $ncpus $run_name $model_name $fault_name $slab_name $mesh_name $distances_name $utm_zone $scaling_law $dynamic_gflist $dist_threshold $nrealizations $target_mw $max_slip $hurst $ldip $lstrike $lognormal $slip_standard_deviation $num_modes $rake $force_magnitude $force_area $no_random $time_epi $hypocenter $force_hypocenter $mean_slip $center_subfault $use_hypo_fraction $source_time_function $rise_time_depths $shear_wave_fraction $shear_wave_fraction_deep $shear_wave_fraction_shallow $gf_list $g_name $nfft $dt $zeta $dk $pmin $pmax $kmax $custom_stf $rupture_list $max_slip_rule $slip_tol $stf_falloff_rate $rupture_name $hot_start $impulse $epicenter $prepinput $rupt1 $rupt2 $moho_depth_in_km $hf_dt $duration $pwave $zero_phase $order $fcorner $inpolygon_fault $inpolygon_hypocenter $high_stress_depth $stress_parameter
+    sh dag_v2_4_jobC.sh $project_name $HOMEPATH $ncpus $run_name $model_name $fault_name $slab_name $mesh_name $distances_name $utm_zone $scaling_law $dynamic_gflist $dist_threshold $nrealizations $target_mw $max_slip $hurst $ldip $lstrike $lognormal $slip_standard_deviation $num_modes $rake $force_magnitude $force_area $no_random $time_epi $hypocenter $force_hypocenter $mean_slip_name $center_subfault $use_hypo_fraction $source_time_function $rise_time_depths $shear_wave_fraction $shear_wave_fraction_deep $shear_wave_fraction_shallow $gf_list $g_name $nfft $dt $zeta $dk $pmin $pmax $kmax $custom_stf $rupture_list $max_slip_rule $slip_tol $stf_falloff_rate $rupture_name $hot_start $impulse $epicenter $prepinput $rupt1 $rupt2 $moho_depth_in_km $hf_dt $duration $pwave $zero_phase $order $fcorner $inpolygon_fault $inpolygon_hypocenter $high_stress_depth $stress_parameter
 fi
 
