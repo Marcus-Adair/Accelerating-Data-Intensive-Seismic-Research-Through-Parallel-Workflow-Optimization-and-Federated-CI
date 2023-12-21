@@ -44,7 +44,7 @@ no_random=${26}                         # If true uses median length/width if fa
 time_epi=${27}        # Defines the hypocentral time
 hypocenter=${28}        # Defines the specific hypocenter location if force_hypocenter=True
 force_hypocenter=${29}                  # Forces hypocenter to occur at specified lcoationa s opposed to random (True/False)
-mean_slip=${30}                      # Provide path to file name of .rupt to be used as mean slip pattern
+mean_slip_name=${30}                      # Provide path to file name of .rupt to be used as mean slip pattern
 center_subfault=${31}                # Integer value, if != None use that subfault as center for defining rupt area. If none then slected at random
 use_hypo_fraction=${32}                 # If true use hypocenter PDF positions from Melgar & Hayes 2019, if false then selects at random   (True/False)
 
@@ -96,6 +96,11 @@ stress_parameter=${67}
 
 ##############################################################################################
 
+
+# Set the hypocenter paths
+inpolygon_fault="$HOMEPATH/$PROJNAME/data/model_info/$inpolygon_fault"
+inpolygon_hypocenter="$HOMEPATH/$PROJNAME/data/model_info/$inpolygon_hypocenter"
+
 set -e  # Have job exit if any command returns with non-zero exit status - aka failure
 
 # get the name of the unique input for run
@@ -129,7 +134,7 @@ mkdir preparedoutput$runnum
 
 #echo "the mean_slip is: $mean_sleap"
 
-echo "Pwave: $pwave"
+echo "mean_slip_name: $mean_slip_name"
 echo "Moved input. Initing folder structure ..."
 
 # if the ruptures and GFs/synths aren't both already made 
@@ -154,6 +159,7 @@ if [ "$ruptsmade" = "0" ]; then
     mv *.mshout $HOMEPATH/$PROJNAME/data/model_info
     mv *.xyz $HOMEPATH/$PROJNAME/data/model_info
     mv *.gflist $HOMEPATH/$PROJNAME/data/station_info
+    mv hypo_4548 $HOMEPATH/$PROJNAME/data/model_info
     cd ~               # go back
 
     # make dir to contain the needed output to make waveforms in future jobs
@@ -167,7 +173,7 @@ if [ "$ruptsmade" = "0" ]; then
     dcount=$(ls *.npy 2>/dev/null | wc -l)
     if [ "$dcount" = "0" ]; then
         #python3 /MudPy/examples/fakequakes/planar/mudpy_single_exec_SSE.fq.py make_ruptures -load_distances=0 -g_from_file=0 -ncpus=1 -model_name=$model_name -fault_name=$fault_name -epicenter=$epicenter -slab_name=$slab_name -mesh_name=$mesh_name -distances_name=$distances_name -utm_zone=$utm_zone -scaling_law=$scaling_law -dynamic_gflist=$dynamic_gflist -dist_threshold=$dist_threshold -nrealizations=$nrealizations -max_slip=$max_slip -hurst=$hurst -ldip=$ldip -lstrike=$lstrike -lognormal=$lognormal -slip_standard_deviation=$slip_standard_deviation -num_modes=$num_modes -rake=$rake -force_magnitude=$force_magnitude -force_area=$force_area -no_random=$no_random -time_epi=$time_epi -hypocenter=$hypocenter -force_hypocenter=$force_hypocenter -mean_slip=$mean_slip -center_subfault=$center_subfault -use_hypo_fraction=$use_hypo_fraction -source_time_function=$source_time_function -rise_time_depths=$rise_time_depths -shear_wave_fraction=$shear_wave_fraction -gf_list=$gf_list -g_name=$g_name -nfft=$nfft -dt=$dt -dk=$dk -pmin=$pmin -pmax=$pmax -kmax=$kmax -custom_stf=$custom_stf -rupture_list=$rupture_list -target_mw=$target_mw -max_slip_rule=$max_slip_rule -slip_tol=$slip_tol -shear_wave_fraction_deep=$shear_wave_fraction_deep -shear_wave_fraction_shallow=$shear_wave_fraction_shallow -zeta=$zeta -stf_falloff_rate=$stf_falloff_rate -rupture_name=$rupture_name -hot_start=$hot_start -impulse=$impulse -home=$HOMEPATH -project_name=$PROJNAME -run_name=$run_name
-	python3 /MudPy/examples/fakequakes/planar/mudpy_single_exec_SSE.fq.py make_ruptures -load_distances=0 -g_from_file=0 -ncpus=1 -model_name=$model_name -fault_name=$fault_name  -slab_name=$slab_name -mesh_name=$mesh_name -distances_name=$distances_name -utm_zone=$utm_zone -scaling_law=$scaling_law -nrealizations=$nrealizations -max_slip=$max_slip -hurst=$hurst -ldip=$ldip -lstrike=$lstrike -lognormal=$lognormal -slip_standard_deviation=$slip_standard_deviation -num_modes=$num_modes -rake=$rake -force_magnitude=$force_magnitude -force_area=$force_area -time_epi=$time_epi -force_hypocenter=$force_hypocenter  -use_hypo_fraction=$use_hypo_fraction -source_time_function=$source_time_function -rise_time_depths=$rise_time_depths  -gf_list=$gf_list -g_name=$g_name -nfft=$nfft -dt=$dt -dk=$dk -pmin=$pmin -pmax=$pmax -kmax=$kmax -custom_stf=$custom_stf -rupture_list=$rupture_list -target_mw=$target_mw -max_slip_rule=$max_slip_rule  -stf_falloff_rate=$stf_falloff_rate -hot_start=$hot_start -home=$HOMEPATH -project_name=$PROJNAME -run_name=$run_name -moho_depth_in_km=$moho_depth_in_km -hf_dt=$hf_dt -duration=$duration -pwave=$pwave -zero_phase=$zero_phase -order=$order -fcorner=$fcorner -inpolygon_fault=$inpolygon_fault -inpolygon_hypocenter=$inpolygon_hypocenter -high_stress_depth=$high_stress_depth -stress_parameter=$stress_parameter
+	python3 /MudPy/examples/fakequakes/planar/mudpy_single_exec_SSE.fq.py make_ruptures -load_distances=0 -g_from_file=0 -ncpus=1 -model_name=$model_name -fault_name=$fault_name  -slab_name=$slab_name -mesh_name=$mesh_name -distances_name=$distances_name -utm_zone=$utm_zone -scaling_law=$scaling_law -nrealizations=$nrealizations -max_slip=$max_slip -hurst=$hurst -ldip=$ldip -lstrike=$lstrike -lognormal=$lognormal -slip_standard_deviation=$slip_standard_deviation -num_modes=$num_modes -rake=$rake -force_magnitude=$force_magnitude -force_area=$force_area -time_epi=$time_epi -force_hypocenter=$force_hypocenter  -use_hypo_fraction=$use_hypo_fraction -source_time_function=$source_time_function -rise_time_depths=$rise_time_depths  -gf_list=$gf_list -g_name=$g_name -nfft=$nfft -dt=$dt -dk=$dk -pmin=$pmin -pmax=$pmax -kmax=$kmax -custom_stf=$custom_stf -rupture_list=$rupture_list -target_mw=$target_mw -max_slip_rule=$max_slip_rule  -stf_falloff_rate=$stf_falloff_rate -hot_start=$hot_start -home=$HOMEPATH -project_name=$PROJNAME -run_name=$run_name -moho_depth_in_km=$moho_depth_in_km -hf_dt=$hf_dt -duration=$duration -pwave=$pwave -zero_phase=$zero_phase -order=$order -fcorner=$fcorner -inpolygon_fault=$inpolygon_fault -inpolygon_hypocenter=$inpolygon_hypocenter -high_stress_depth=$high_stress_depth -stress_parameter=$stress_parameter -mean_slip_name=$mean_slip_name
     else
 	
 	echo "recycling distance matrices ..."
@@ -175,7 +181,7 @@ if [ "$ruptsmade" = "0" ]; then
         # Move matrices to project and recycle 
         mv *.npy $HOMEPATH/$PROJNAME/data/distances         
         #python3 /MudPy/examples/fakequakes/planar/mudpy_single_exec_SSE.fq.py make_ruptures -load_distances=1 -g_from_file=0 -ncpus=$ncpus -model_name=$model_name -epicenter=$epicenter -fault_name=$fault_name -slab_name=$slab_name -mesh_name=$mesh_name -distances_name=$distances_name -utm_zone=$utm_zone -scaling_law=$scaling_law -dynamic_gflist=$dynamic_gflist -dist_threshold=$dist_threshold -nrealizations=$nrealizations -max_slip=$max_slip -hurst=$hurst -ldip=$ldip -lstrike=$lstrike -lognormal=$lognormal -slip_standard_deviation=$slip_standard_deviation -num_modes=$num_modes -rake=$rake -force_magnitude=$force_magnitude -force_area=$force_area -no_random=$no_random -time_epi=$time_epi -hypocenter=$hypocenter -force_hypocenter=$force_hypocenter -mean_slip=$mean_slip -center_subfault=$center_subfault -use_hypo_fraction=$use_hypo_fraction -source_time_function=$source_time_function -rise_time_depths=$rise_time_depths -shear_wave_fraction=$shear_wave_fraction -gf_list=$gf_list -g_name=$g_name -nfft=$nfft -dt=$dt -dk=$dk -pmin=$pmin -pmax=$pmax -kmax=$kmax -custom_stf=$custom_stf -rupture_list=$rupture_list -target_mw=$target_mw -max_slip_rule=$max_slip_rule -slip_tol=$slip_tol -shear_wave_fraction_deep=$shear_wave_fraction_deep -shear_wave_fraction_shallow=$shear_wave_fraction_shallow -zeta=$zeta -stf_falloff_rate=$stf_falloff_rate -rupture_name=$rupture_name -hot_start=$hot_start -impulse=$impulse -home=$HOMEPATH -project_name=$PROJNAME -run_name=$run_name
-	python3 /MudPy/examples/fakequakes/planar/mudpy_single_exec_SSE.fq.py make_ruptures -load_distances=1 -g_from_file=0 -ncpus=$ncpus -model_name=$model_name -fault_name=$fault_name -slab_name=$slab_name -mesh_name=$mesh_name -distances_name=$distances_name -utm_zone=$utm_zone -scaling_law=$scaling_law -nrealizations=$nrealizations -max_slip=$max_slip -hurst=$hurst -ldip=$ldip -lstrike=$lstrike -lognormal=$lognormal -slip_standard_deviation=$slip_standard_deviation -num_modes=$num_modes -rake=$rake -force_magnitude=$force_magnitude -force_area=$force_area -time_epi=$time_epi -force_hypocenter=$force_hypocenter  -use_hypo_fraction=$use_hypo_fraction -source_time_function=$source_time_function -rise_time_depths=$rise_time_depths -gf_list=$gf_list -g_name=$g_name -nfft=$nfft -dt=$dt -dk=$dk -pmin=$pmin -pmax=$pmax -kmax=$kmax -custom_stf=$custom_stf -rupture_list=$rupture_list -target_mw=$target_mw -max_slip_rule=$max_slip_rule -stf_falloff_rate=$stf_falloff_rate -hot_start=$hot_start -home=$HOMEPATH -project_name=$PROJNAME -run_name=$run_name -moho_depth_in_km=$moho_depth_in_km -hf_dt=$hf_dt -duration=$duration -pwave=$pwave -zero_phase=$zero_phase -order=$order -fcorner=$fcorner -inpolygon_fault=$inpolygon_fault -inpolygon_hypocenter=$inpolygon_hypocenter -high_stress_depth=$high_stress_depth -stress_parameter=$stress_parameter
+	python3 /MudPy/examples/fakequakes/planar/mudpy_single_exec_SSE.fq.py make_ruptures -load_distances=1 -g_from_file=0 -ncpus=$ncpus -model_name=$model_name -fault_name=$fault_name -slab_name=$slab_name -mesh_name=$mesh_name -distances_name=$distances_name -utm_zone=$utm_zone -scaling_law=$scaling_law -nrealizations=$nrealizations -max_slip=$max_slip -hurst=$hurst -ldip=$ldip -lstrike=$lstrike -lognormal=$lognormal -slip_standard_deviation=$slip_standard_deviation -num_modes=$num_modes -rake=$rake -force_magnitude=$force_magnitude -force_area=$force_area -time_epi=$time_epi -force_hypocenter=$force_hypocenter  -use_hypo_fraction=$use_hypo_fraction -source_time_function=$source_time_function -rise_time_depths=$rise_time_depths -gf_list=$gf_list -g_name=$g_name -nfft=$nfft -dt=$dt -dk=$dk -pmin=$pmin -pmax=$pmax -kmax=$kmax -custom_stf=$custom_stf -rupture_list=$rupture_list -target_mw=$target_mw -max_slip_rule=$max_slip_rule -stf_falloff_rate=$stf_falloff_rate -hot_start=$hot_start -home=$HOMEPATH -project_name=$PROJNAME -run_name=$run_name -moho_depth_in_km=$moho_depth_in_km -hf_dt=$hf_dt -duration=$duration -pwave=$pwave -zero_phase=$zero_phase -order=$order -fcorner=$fcorner -inpolygon_fault=$inpolygon_fault -inpolygon_hypocenter=$inpolygon_hypocenter -high_stress_depth=$high_stress_depth -stress_parameter=$stress_parameter -mean_slip_name=$mean_slip_name
                 
     fi
     
