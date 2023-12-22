@@ -8,7 +8,7 @@
 
 universe = vanilla
 
-+SingularityImage = "osdf:///ospool/ap21/data/marcus_adair/madair_mudpy_mudsing_image_complete_SSE_v18.sif"
++SingularityImage = "osdf:///ospool/ap21/data/marcus_adair/madair_mudpy_mudsing_image_complete_SSE_v19.sif"
 
 executable = dag_v2_4_mudpy_OSG_config_wrap.sh
 
@@ -27,7 +27,7 @@ log	= fakequakes_output_run$(runnumber)/fakequakes_run$(runnumber).log
 +has_mpi = true
 
 # transfer output > 100MB directly to the stash to a unique directory
-transfer_output_remaps = "mseeds.tar.gz = osdf:///ospool/ap21/marcus_adair/old-public/prepinput/$(preparedinput)/mseeds.tar.gz"
+transfer_output_remaps = "mseeds.tar.gz = osdf:///ospool/ap21/data/marcus_adair/old-public/prepinput/$(preparedinput)/mseeds.tar.gz"
 
 request_cpus	= 4
 request_memory	= 40GB
