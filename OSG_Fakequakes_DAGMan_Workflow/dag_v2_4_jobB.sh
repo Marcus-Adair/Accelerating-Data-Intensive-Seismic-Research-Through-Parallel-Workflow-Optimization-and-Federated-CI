@@ -204,7 +204,14 @@ fi
     
 # If no .mseed matrices were passed in to recycle
 if  [ "$mseedsmade" = "0" ]; then
-    
+
+
+	echo "calling  quasistatic2dynamic ..."
+
+	# TODO: call quasistatic2dynamic=1
+	python3 /MudPy/examples/fakequakes/planar/mudpy_single_exec_SSE.fq.py quasistatic2dynamic -load_distances=0 -g_from_file=0 -ncpus=$ncpus -model_name=$model_name -fault_name=$fault_name -slab_name=$slab_name -mesh_name=$mesh_name -distances_name=$distances_name -utm_zone=$utm_zone -scaling_law=$scaling_law -nrealizations=$nrealizations -max_slip=$max_slip -hurst=$hurst -ldip=$ldip -lstrike=$lstrike -lognormal=$lognormal -slip_standard_deviation=$slip_standard_deviation -num_modes=$num_modes -rake=$rake -force_magnitude=$force_magnitude -force_area=$force_area -time_epi=$time_epi -hypocenter=$hypocenter -force_hypocenter=$force_hypocenter -use_hypo_fraction=$use_hypo_fraction -source_time_function=$source_time_function -rise_time_depths=$rise_time_depths -gf_list=$gf_list -g_name=$g_name -nfft=$nfft -dt=$dt -dk=$dk -pmin=$pmin -pmax=$pmax -kmax=$kmax -custom_stf=$custom_stf -rupture_list=$rupture_list -target_mw=$target_mw -max_slip_rule=$max_slip_rule -stf_falloff_rate=$stf_falloff_rate -hot_start=$hot_start -home=$HOMEPATH -project_name=$PROJNAME -run_name=$run_name -moho_depth_in_km=$moho_depth_in_km -hf_dt=$hf_dt -duration=$duration -pwave=$pwave -zero_phase=$zero_phase -order=$order -fcorner=$fcorner -inpolygon_fault=$inpolygon_fault -inpolygon_hypocenter=$inpolygon_hypocenter -high_stress_depth=$high_stress_depth -stress_parameter=$stress_parameter
+
+
     echo "making waveforms and mseeds"	
 	
     # Run make waveforms with load_G_files=0 to generate the .mseed matrices for an (N-1) number of simulations to use. Also generating one round of waveforms
