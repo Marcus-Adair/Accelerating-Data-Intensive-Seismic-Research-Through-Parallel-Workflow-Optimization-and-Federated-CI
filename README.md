@@ -1,5 +1,7 @@
 # Accelerating Data-Intensive Seismic Research Through Parallel Workflow Optimization and Federated Cyberinfrastructure
 
+WORKS 23 Paper: https://dl.acm.org/doi/10.1145/3624062.3624276
+
 # FakeQuakes DAGMan Workflow (FDW) Source Code
 
 This repository contains source code for the FakeQuakes DAGMan Workflow, a tool that utilizes OSG to parallelize and expedite FakeQuakes earthquakes simulation. This workflow is to be integrated into the VDC.
